@@ -1,0 +1,140 @@
+@import url('https://fonts.googleapis.com/css2?family=Inter:ital,opsz,wght@0,14..32,100..900;1,14..32,100..900&display=swap');
+
+:root {
+    /* COLORES BASE */
+    --color-bg: #F4F6F9;
+    --color-sidebar: #1F2937;
+    --color-navbar: #FFFFFF;
+    --color-border: #E5E7EB;
+
+    /* TEXTOS */
+    --text-primary: #111827;
+    --text-secondary: #6B7280;
+
+    /* ESTADOS FINANCIEROS */
+    --income: #16A34A;
+    --expense: #DC2626;
+
+    /* SOMBRAS */
+    --shadow-soft: 0 4px 12px rgba(0, 0, 0, 0.05);
+    --shadow-card: 0 2px 6px rgba(0, 0, 0, 0.04);
+
+    /* TRANSICIONES */
+    --transition: all 0.2s ease-in-out;
+}
+
+* {
+    margin: 0;
+    padding: 0;
+    box-sizing: border-box;
+}
+
+body {
+    background-color: var(--color-bg);
+    font-family: 'Inter', sans-serif;
+}
+
+.layout {
+    display: grid;
+    grid-template-columns: 250px 1fr;
+    grid-template-rows: 100px 1fr;
+    grid-template-areas:
+        "aside header"
+        "aside main";
+    height: 100vh;
+    margin: 1rem;
+}
+
+/* Asignación por área semántica */
+header {
+    grid-area: header;
+}
+
+aside {
+    grid-area: aside;
+}
+
+main {
+    grid-area: main;
+}
+
+/* Header */
+
+header {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    background-color: var(--color-navbar);
+    padding: 1rem 0;
+    margin-left: .15rem;
+}
+
+h1 {
+    color: var(--color-sidebar);
+    letter-spacing: 1px;
+}
+
+
+/* Aside */
+
+aside {
+    background-color: var(--color-navbar);
+}
+
+.cont__imagen--logo {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+.cont__imagen--logo img {
+    width: 100px;
+}
+
+aside hr {
+    border: 1.5px solid var(--color-border);
+}
+
+aside nav {
+    margin-top: 2rem;
+}
+
+aside ul {
+    list-style: none;
+    width: 100%;
+    display: flex;
+    flex-direction: column;
+    gap: 1.5rem; 
+    align-items: center;
+}
+
+aside ul li {
+    width: 100%;
+    display: flex;
+    justify-content: center;
+}
+
+aside ul li button {
+    width: 100%;
+    font-size: 1.2rem;
+    border: none;
+    background: none;
+    cursor: pointer;
+    padding: 0.8rem 1rem;
+    display: flex;
+    align-items: center;
+    gap: 0.8rem; 
+    justify-content: center;
+    border-radius: 8px;
+    transition: var(--transition);
+}
+
+aside ul li button:hover {
+    background-color: var(--color-bg);
+}
+
+aside ul li button i {
+    font-size: 1.3rem;
+    color: var(--text-secondary);
+}
+

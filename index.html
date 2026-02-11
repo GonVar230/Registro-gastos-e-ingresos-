@@ -3,32 +3,59 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/bootstrap-icons@1.13.1/font/bootstrap-icons.min.css">
     <link rel="stylesheet" href="./styles/style.css">
     <script defer src="./js/main.js"></script>
-    <title>Control financiero</title>
+    <title>Gestión Financiera</title>
 </head>
 <body>
-    <h1>Sistema de Gestión de Gastos e Ingresos Personales</h1>
-    <p>En futuro el proyecto consiste en desarrollar una aplicación tipo dashboard para la gestión de ingresos y gastos mensuales, inspirada en la lógica y visualización de un archivo de Excel, pero llevada a una experiencia web más interactiva y clara.</p>
-    <ul>
-        <li>
-            <strong>Representación visual tipo Excel</strong>
-        </li>
-        <li>
-            <strong>Inputs dinámicos y acciones con modales</strong>
-        </li>
-        <li>
-            <strong>Formulario inicial de configuración mensual</strong>
-        </li>
-        <li>
-            <strong>Resumen mensual</strong>
-        </li>
-        <li>
-            <strong>Sección desplegable de dudas o gastos pendientes</strong>
-        </li>
-        <li>
-            <strong>Gestión de sesiones por mes</strong>
-        </li>
-    </ul>
+
+    <div class="layout">
+
+        <header>
+            <h1>
+                Bienvenido a tu Centro de Gestión Financiera,
+                <strong id="nombre__titulo"></strong>.
+            </h1>
+        </header>
+
+    <aside>
+
+        <div class="cont__imagen--logo">
+            <img src="./assets/logo/logo.png" alt="logo"> 
+        </div>
+
+        <hr>
+
+        <nav>
+            <ul>
+                <li>
+                    <button>
+                        <i class="bi bi-bar-chart-fill"></i>
+                        <span>Dashboard</span>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <i class="bi bi-graph-down-arrow"></i>
+                        <span>Gastos</span>
+                    </button>
+                </li>
+                <li>
+                    <button>
+                        <i class="bi bi-wallet2"></i>
+                        <span>Ingresos</span>
+                    </button>
+                </li>
+            </ul>
+        </nav>
+
+</aside>
+
+    <main>
+
+    </main>
+
+</div>
 </body>
 </html>
