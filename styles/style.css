@@ -34,6 +34,34 @@ body {
     font-family: 'Inter', sans-serif;
 }
 
+
+/* Formulario para extraer info */
+.cuestionario__inicial {
+    height: 100vh;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+}
+
+.cuestionario__inicial input {
+    padding: 0.6rem;
+    width: 250px;
+    border-radius: 6px;
+    border: 1px solid var(--color-border);
+}
+
+.cuestionario__inicial button {
+    padding: 0.6rem 1.5rem;
+    border: none;
+    border-radius: 6px;
+    background-color: var(--color-sidebar);
+    color: white;
+    cursor: pointer;
+}
+
+
 .layout {
     display: grid;
     grid-template-columns: 250px 1fr;
@@ -41,8 +69,9 @@ body {
     grid-template-areas:
         "aside header"
         "aside main";
-    height: 100vh;
+    height: 95dvh;
     margin: 1rem;
+    display: none;
 }
 
 /* Asignación por área semántica */
@@ -58,6 +87,7 @@ main {
     grid-area: main;
 }
 
+
 /* Header */
 
 header {
@@ -67,11 +97,14 @@ header {
     background-color: var(--color-navbar);
     padding: 1rem 0;
     margin-left: .15rem;
+    box-shadow: var(--shadow-soft);
+    border-radius: 0 1rem 1rem 0;
 }
 
 h1 {
     color: var(--color-sidebar);
     letter-spacing: 1px;
+    font-weight: 600;
 }
 
 
@@ -79,6 +112,8 @@ h1 {
 
 aside {
     background-color: var(--color-navbar);
+    box-shadow: var(--shadow-soft);
+    border-radius: 1rem 0 0 0 ;
 }
 
 .cont__imagen--logo {
@@ -138,3 +173,55 @@ aside ul li button i {
     color: var(--text-secondary);
 }
 
+/* Main */
+
+main {
+    margin: 2rem;
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    grid-template-rows: repeat(6, 1fr);
+    gap: 1rem;
+}
+
+main h3 {
+    font-weight: 400;
+}
+
+.cont__gastos,.cont__ingresos,.ahorros,.movimientos {
+    background-color: var(--color-navbar);
+    padding: 1.5rem;
+    font-weight: 300;
+}
+
+.cont__ingresos {
+    grid-row: span 2 / span 2;
+    grid-column-start: 1;
+    grid-row-start: 2;
+}
+
+.cont__gastos {
+    grid-row: span 2 / span 2;
+    grid-column-start: 2;
+    grid-row-start: 2;
+}
+
+.movimientos {
+    background-color: var(--color-navbar);
+    grid-column: span 3 / span 3;
+    grid-row: span 3 / span 3;
+    grid-column-start: 1;
+    grid-row-start: 4;
+}
+
+.ahorros {
+    grid-row: span 2 / span 2;
+    grid-column-start: 3;
+    grid-row-start: 2;
+    display: flex;
+    flex-direction: column;
+}
+
+.mes {
+    grid-column-start: 1;
+    grid-row-start: 1;
+}

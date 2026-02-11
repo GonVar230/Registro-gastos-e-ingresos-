@@ -10,6 +10,25 @@
 </head>
 <body>
 
+    <div class="cuestionario__inicial">
+
+        <h2>Complete el formulario para ver el Dashboard</h2>
+        <label for="name">Nombre</label>
+        <input type="text" id="name">
+        
+        <label for="ingresos">Ingresos</label>
+        <input type="number" id="ingresos">
+
+        <label for="ahorros-mes">Ahorros Deseados</label>
+        <input type="number" id="ahorros-mes">
+
+        <label for="mes">Mes</label>
+        <input type="text" id="mes">
+
+        <button>Enviar</button>
+
+    </div>
+
     <div class="layout">
 
         <header>
@@ -54,7 +73,47 @@
 
     <main>
 
+        <div class="mes">
+            <h3 class="mes__dashboard"></h3>
+        </div>
+
+        <div class="cont__ingresos">
+            <div class="info__ingresos">
+                <h3>Total Ingresos</h3>
+                <span id="monto__ingresos">$</span>
+            </div>
+            <div class="img__ingresos">
+                <img src="" alt="">
+            </div>
+        </div>
+
+        <div class="cont__gastos">
+            <div class="info__gastos">
+                <h3>Total Gastos</h3>
+                <span id="monto__ingresos">$</span>
+            </div>
+            <div class="img__gastos">
+                <img src="" alt="">
+            </div>
+        </div>
+
+        <div class="movimientos">
+            <h3>Últimos Movimientos</h3>
+        </div>
+
+        <div class="ahorros">
+            <h3>Meta Ahorro</h3>
+            <div>
+                <span>$ 0</span> <span id="ahorro__pensado"> </span>
+            </div>
+            
+            <button>Agregar Ahorro</button>
+        </div>
+
+        
+
     </main>
+    
 
 </div>
 </body>
