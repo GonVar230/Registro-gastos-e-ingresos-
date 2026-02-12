@@ -10,24 +10,27 @@
 </head>
 <body>
 
-    <div class="cuestionario__inicial">
-
-        <h2>Complete el formulario para ver el Dashboard</h2>
-        <label for="name">Nombre</label>
-        <input type="text" id="name">
+    <div class="cont__cuestionario--inicial">
         
-        <label for="ingresos">Ingresos</label>
-        <input type="number" id="ingresos">
+        <form id="iniciando">
+            <h2>Ingresá tus datos para comenzar</h2>
+            <label for="name">Nombre</label>
+            <input type="text" id="name" required>
+        
+            <label for="ingresos">Ingresos</label>
+            <input type="number" id="ingresos" required>
 
-        <label for="ahorros-mes">Ahorros Deseados</label>
-        <input type="number" id="ahorros-mes">
+            <label for="ahorros-mes">Ahorros Esperados</label>
+            <input type="number" id="ahorros-mes" required>
 
-        <label for="mes">Mes</label>
-        <input type="text" id="mes">
+            <label for="mes">Mes a Evaluar</label>
+            <input type="text" id="mes" required>
 
-        <button>Enviar</button>
+            <button type="submit">Enviar</button>
+        </form>
 
     </div>
+
 
     <div class="layout">
 
@@ -38,7 +41,7 @@
             </h1>
         </header>
 
-    <aside>
+    <aside class="sidebar">
 
         <div class="cont__imagen--logo">
             <img src="./assets/logo/logo.png" alt="logo"> 
@@ -78,20 +81,18 @@
         </div>
 
         <div class="cont__ingresos">
-            <div class="info__ingresos">
-                <h3>Total Ingresos</h3>
-                <span id="monto__ingresos">$</span>
-            </div>
+            <h3>Total Ingresos</h3>
+            <span id="monto__ingresos">$ 0</span>
+            
             <div class="img__ingresos">
                 <img src="" alt="">
             </div>
         </div>
 
         <div class="cont__gastos">
-            <div class="info__gastos">
-                <h3>Total Gastos</h3>
-                <span id="monto__ingresos">$</span>
-            </div>
+            <h3>Total Gastos</h3>
+            <span id="monto__gastos">$ 0</span>
+
             <div class="img__gastos">
                 <img src="" alt="">
             </div>
@@ -101,13 +102,19 @@
             <h3>Últimos Movimientos</h3>
         </div>
 
+        <div class="historial__ahorros">
+            <h3>Historial Ahorros</h3>
+        </div>
+
         <div class="ahorros">
             <h3>Meta Ahorro</h3>
             <div>
                 <span>$ 0</span> <span id="ahorro__pensado"> </span>
             </div>
             
-            <button>Agregar Ahorro</button>
+            <div>
+                <button id="sumar__ahorro">Sumar Ahorro</button>
+            </div>
         </div>
 
         
