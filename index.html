@@ -15,16 +15,16 @@
         <form id="iniciando">
             <h2>Ingresá tus datos para comenzar</h2>
             <label for="name">Nombre</label>
-            <input type="text" id="name" required>
+            <input type="text" id="name" name="name" required>
         
             <label for="ingresos">Ingresos</label>
-            <input type="number" id="ingresos" required>
+            <input type="number" id="ingresos" name="ingresos" required>
 
             <label for="ahorros-mes">Ahorros Esperados</label>
-            <input type="number" id="ahorros-mes" required>
+            <input type="number" id="ahorros-mes" name="ahorros-mes" required>
 
             <label for="mes">Mes a Evaluar</label>
-            <input type="text" id="mes" required>
+            <input type="text" id="mes" name="mes" required>
 
             <button type="submit">Enviar</button>
         </form>
@@ -104,10 +104,20 @@
 
         <div class="historial__ahorros">
             <h3>Historial Ahorros</h3>
+                <table class="tabla">
+                <tr>
+                    <th>Ahorro</th>
+                    <th>Fecha</th>
+                </tr>
+            </table>
+            
+            <div id="muestra__historial">
+                
+            </div>
         </div>
 
         <div class="ahorros">
-            <h3>Meta Ahorro</h3>
+            <h3>Ahorrar</h3>
             <div>
                 <span>$ 0</span> <span id="ahorro__pensado"> </span>
             </div>

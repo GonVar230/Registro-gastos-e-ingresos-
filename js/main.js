@@ -42,7 +42,7 @@ formulario.addEventListener("submit", (e) => {
 });
 
 
-// Este codigo va a ser borrado proximamante, unicamente lo hago para trabajar en el dashboard
+// // Este codigo va a ser borrado proximamante, unicamente lo hago para trabajar en el dashboard
 // const cont = document.querySelector(".cont__cuestionario--inicial")
 
 // cont.style.display = "none"
@@ -80,5 +80,95 @@ sidebar.addEventListener("mouseleave", () => {
         span.classList.remove("span__visible");
     });
 });
+
+
+
+// Haciendo modal para intentar reutilizar la funcion
+
+// Primero realizo el modal de ahorros y lo enlazo al historial
+const btnSumarAhorro = document.getElementById("sumar__ahorro");
+const muestraHistorial = document.getElementById("muestra__historial");
+
+
+const CrearModal = ({titulo,label,inputType,btnId,onConfirm}) => {
+
+    let modal = document.createElement("div");
+    let form = document.createElement("form");
+
+    modal.classList.add("modal");
+    form.classList.add("modal__form");
+
+    form.innerHTML = `
+    <h3>${titulo}</h3>
+
+    <label>${label}</label>
+    <input type="${inputType}" id="valor__ahorro" required>
+
+    <label>Selecciona una fecha:</label>
+    <input type="date" id="fecha__ahorro" required>
+
+    <div class="modal__acciones">
+        <button type="submit" id="${btnId}">Confirmar</button>
+    </div>
+    `
+
+    modal.appendChild(form);
+    document.body.appendChild(modal);
+    
+    form.addEventListener("submit", (e) => {
+        e.preventDefault();
+
+        const valor = form.querySelector("#valor__ahorro").value;
+        const fecha = form.querySelector("#fecha__ahorro").value;
+
+        onConfirm(valor, fecha); 
+
+        modal.remove();
+    });
+}
+
+
+const crearAhorro = () => {
+    const enlazar = document.createElement("div");
+    enlazar.classList.add("enlazar");
+
+    const inputAhorro = document.getElementById("valor__ahorro");
+    const inputFecha = document.getElementById("fecha__ahorro");
+
+
+    enlazar.innerHTML = `
+        <div>
+            <div>
+                <i class="bi bi-piggy-bank"></i>
+                <span>$${inputAhorro.value}</span>
+            </div>
+        
+            <div>
+                <span>${inputFecha.value}</span>
+            </div>
+        
+            <button class="del__ahorro">
+                <i class="bi bi-x-lg"></i>
+            </button>
+        </div>
+
+        <hr>
+    `;
+
+    enlazar.querySelector(".del__ahorro").addEventListener("click", () => enlazar.remove());
+
+    muestraHistorial.appendChild(enlazar);
+};
+
+    btnSumarAhorro.addEventListener("click", () => {
+        CrearModal({
+            titulo: "Ingrese Ahorro",
+            label: "Monto",
+            inputType: "number",
+            btnId: "confirmar__ahorro",
+            onConfirm: crearAhorro
+        });
+    })
+
 
 

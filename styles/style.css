@@ -322,9 +322,9 @@ main h3 {
 }
 
 
-/* Apartado ahorros */
+/* Apartado ahorros  y historial de ahorros */
 
-#sumar__ahorro {
+#sumar__ahorro, #confirmar__ahorro {
     padding: .5rem;
     border: none;
     color: var(--color-navbar);
@@ -334,6 +334,116 @@ main h3 {
     cursor: pointer;
 }
 
-#sumar__ahorro:hover {
+#sumar__ahorro:hover,#confirmar__ahorro:hover {
     opacity: .75;
 }
+
+#muestra__historial {
+    max-height: 230px;   
+    overflow-y: auto;    
+}
+
+
+.tabla {
+    width: 85%;
+    margin-top: 10px;
+    transform: translateX(-10px);
+    border-collapse: collapse;
+}
+
+.tabla th,
+.tabla td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
+}
+
+.tabla th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
+}
+
+.tabla th:first-of-type {
+    transform: translateX(50px);
+}
+
+/* Dandole el estilo al modal */
+
+.modal {
+    position: fixed;
+    inset: 0; 
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    box-shadow: var(--shadow-soft); 
+    z-index: 1000;
+}
+
+.modal__form {
+    background: var(--color-navbar);
+    padding: 1.5rem;
+    border-radius: 1rem;
+    min-width: 300px;
+    max-width: 90%;
+    display: flex;
+    flex-direction: column;
+    gap: 0.8rem;
+    box-shadow: 0 10px 25px rgba(0, 0, 0, 0.25);
+    animation: modalFade 0.2s ease;
+}
+
+
+@keyframes modalFade {
+    from {
+        opacity: 0;
+        transform: translateY(-10px) scale(0.98);
+    }
+    to {
+        opacity: 1;
+        transform: translateY(0) scale(1);
+    }
+}
+
+/* divs creados en historial de ahorros */
+.enlazar {
+    margin: 20px 0px;
+    font-weight: 500;
+    width: 85%;
+}
+
+.enlazar > div {
+    display: flex;
+    flex-direction: row;
+    justify-content: space-between;
+}
+
+.enlazar div > i {
+    background-color: var(--income);
+    padding: 2px;
+    border-radius: 10px;
+    color: var(--color-border);
+    margin-right: 2rem;
+}
+
+.enlazar button {
+    border: none;
+    background-color: transparent;
+    cursor: pointer;
+}
+
+.enlazar button > i {
+    color: var(--color-sidebar);
+}
+
+.enlazar button > i:hover {
+    color: var(--expense);
+}
+
+.enlazar hr {
+    margin-top: 4px;
+    border: .1px solid var(--color-bg);
+}
+
+
