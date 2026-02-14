@@ -159,7 +159,7 @@ h1 {
 aside {
     background-color: var(--color-navbar);
     box-shadow: var(--shadow-soft);
-    border-radius: 0 1rem 0 0 ;
+    border-radius: 1rem 1rem 0 0 ;
 }
 
 .cont__imagen--logo {
@@ -327,6 +327,15 @@ main h3 {
     color: var(--expense);
 }
 
+.cont__ingresos hr,.cont__gastos hr {
+    border: 1px solid var(--color-border);
+    width: 100%;
+}
+
+.cont__ingresos h3,.cont__gastos h3,.ahorros h3 {
+    font-size: 1.5rem;
+}
+
 
 /* Apartado ahorros  y historial de ahorros */
 
@@ -339,6 +348,23 @@ main h3 {
     border-radius: .5rem;
     cursor: pointer;
     letter-spacing: .5px;
+    min-width: 130px;
+}
+
+#borrar__progreso {
+    padding: .5rem;
+    margin-left: .5rem;
+    border: none;
+    color: var(--color-navbar);
+    background-color: var(--expense);
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    letter-spacing: .5px;
+}
+
+#borrar__progreso:hover {
+    opacity: .75;
 }
 
 #sumar__ahorro:hover,#confirmar__ahorro:hover, .simular__guardado > button:hover {
@@ -459,3 +485,47 @@ main h3 {
 }
 
 
+/* modal personalizada para borrar */
+
+.modal__borrar {
+    position: fixed;
+    inset: 0; 
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    backdrop-filter: blur(2px);
+    z-index: 1000;
+    padding: 1.5rem;
+    gap: 1rem;
+    box-shadow: var(--shadow-soft);
+    animation: modalFade 0.2s ease;
+}
+
+#confirmar__eliminar, #cancelar__eliminar {
+    background-color: var(--expense);
+    color: var(--color-navbar);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#confirmar__eliminar:hover {
+    transform: scale(1.05);
+}
+
+#cancelar__eliminar {
+    background-color: #bdc3c7;
+    color: var(--color-bg);
+    border: none;
+    padding: 0.5rem 1.2rem;
+    border-radius: 5px;
+    cursor: pointer;
+    transition: transform 0.1s;
+}
+
+#cancelar__eliminar:hover {
+    transform: scale(1.05);
+}
