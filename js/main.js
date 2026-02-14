@@ -90,7 +90,7 @@ const btnSumarAhorro = document.getElementById("sumar__ahorro");
 const muestraHistorial = document.getElementById("muestra__historial");
 
 
-const CrearModal = ({titulo,label,inputType,btnId,onConfirm}) => {
+const CrearModal = ({titulo,campos,btnId,onConfirm}) => {
 
     let modal = document.createElement("div");
     let form = document.createElement("form");
@@ -98,19 +98,18 @@ const CrearModal = ({titulo,label,inputType,btnId,onConfirm}) => {
     modal.classList.add("modal");
     form.classList.add("modal__form");
 
+    let inputsHTML = campos.map(campo => `
+        <label>${campo.label}</label>
+        <input type="${campo.type}" id="${campo.id}" required>
+    `).join("");
+
     form.innerHTML = `
-    <h3>${titulo}</h3>
-
-    <label>${label}</label>
-    <input type="${inputType}" id="valor__ahorro" required>
-
-    <label>Selecciona una fecha:</label>
-    <input type="date" id="fecha__ahorro" required>
-
-    <div class="modal__acciones">
-        <button type="submit" id="${btnId}">Confirmar</button>
-    </div>
-    `
+        <h3>${titulo}</h3>
+        ${inputsHTML}
+        <div class="modal__acciones">
+            <button type="submit" id="${btnId}">Confirmar</button>
+        </div>
+    `;
 
     modal.appendChild(form);
     document.body.appendChild(modal);
@@ -118,33 +117,32 @@ const CrearModal = ({titulo,label,inputType,btnId,onConfirm}) => {
     form.addEventListener("submit", (e) => {
         e.preventDefault();
 
-        const valor = form.querySelector("#valor__ahorro").value;
-        const fecha = form.querySelector("#fecha__ahorro").value;
+        const valores = {};
 
-        onConfirm(valor, fecha); 
+        campos.forEach(campo => {
+            valores[campo.id] = form.querySelector(`#${campo.id}`).value;
+        });
+
+        onConfirm(valores); 
 
         modal.remove();
     });
 }
 
 
-const crearAhorro = () => {
+const crearAhorro = (valores) => {
     const enlazar = document.createElement("div");
     enlazar.classList.add("enlazar");
-
-    const inputAhorro = document.getElementById("valor__ahorro");
-    const inputFecha = document.getElementById("fecha__ahorro");
-
 
     enlazar.innerHTML = `
         <div>
             <div>
                 <i class="bi bi-piggy-bank"></i>
-                <span>$${inputAhorro.value}</span>
+                <span>$${valores.valor__ahorro}</span>
             </div>
         
             <div>
-                <span>${inputFecha.value}</span>
+                <span>${valores.fecha__ahorro}</span>
             </div>
         
             <button class="del__ahorro">
@@ -160,15 +158,15 @@ const crearAhorro = () => {
     muestraHistorial.appendChild(enlazar);
 };
 
-    btnSumarAhorro.addEventListener("click", () => {
-        CrearModal({
-            titulo: "Ingrese Ahorro",
-            label: "Monto",
-            inputType: "number",
-            btnId: "confirmar__ahorro",
-            onConfirm: crearAhorro
-        });
-    })
 
-
-
+btnSumarAhorro.addEventListener("click", () => {
+    CrearModal({
+        titulo: "Ingrese Ahorro",
+        campos: [
+            { label: "Monto", type: "number", id: "valor__ahorro" },
+            { label: "Fecha", type: "date", id: "fecha__ahorro" }
+        ],
+        btnId: "confirmar__ahorro",
+        onConfirm: crearAhorro
+    });
+});
