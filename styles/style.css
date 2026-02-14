@@ -265,7 +265,6 @@ main h3 {
 }
 
 .movimientos {
-    background-color: var(--color-navbar);
     grid-column: span 2 / span 2;
     grid-row: span 3 / span 3;
     grid-column-start: 1;
@@ -289,6 +288,13 @@ main h3 {
 .mes {
     grid-column-start: 1;
     grid-row-start: 1;
+}
+
+.simular__guardado {
+    grid-column-start: 3;
+    display: flex;
+    justify-content: end;
+    align-items: end;
 }
 
 
@@ -324,7 +330,7 @@ main h3 {
 
 /* Apartado ahorros  y historial de ahorros */
 
-#sumar__ahorro, #confirmar__ahorro {
+#sumar__ahorro, #confirmar__ahorro,.simular__guardado > button {
     padding: .5rem;
     border: none;
     color: var(--color-navbar);
@@ -332,9 +338,10 @@ main h3 {
     border: none;
     border-radius: .5rem;
     cursor: pointer;
+    letter-spacing: .5px;
 }
 
-#sumar__ahorro:hover,#confirmar__ahorro:hover {
+#sumar__ahorro:hover,#confirmar__ahorro:hover, .simular__guardado > button:hover {
     opacity: .75;
 }
 
@@ -394,6 +401,11 @@ main h3 {
     animation: modalFade 0.2s ease;
 }
 
+.cerrar__modales {
+    position: absolute;
+    transform: translateX(240px);
+}
+
 
 @keyframes modalFade {
     from {
@@ -427,17 +439,17 @@ main h3 {
     margin-right: 2rem;
 }
 
-.enlazar button {
+.enlazar button, .cerrar__modales {
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-.enlazar button > i {
+.enlazar button > i,.cerrar__modales {
     color: var(--color-sidebar);
 }
 
-.enlazar button > i:hover {
+.enlazar button > i:hover, .cerrar__modales:hover {
     color: var(--expense);
 }
 

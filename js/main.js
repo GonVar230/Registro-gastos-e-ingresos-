@@ -109,10 +109,15 @@ const CrearModal = ({titulo,campos,btnId,onConfirm}) => {
         <div class="modal__acciones">
             <button type="submit" id="${btnId}">Confirmar</button>
         </div>
+
+        <button class="cerrar__modales"><i class="bi bi-x-lg"></i></button>
     `;
 
     modal.appendChild(form);
     document.body.appendChild(modal);
+
+    modal.querySelector(".cerrar__modales")
+    .addEventListener("click", () => modal.remove());
     
     form.addEventListener("submit", (e) => {
         e.preventDefault();
@@ -129,10 +134,17 @@ const CrearModal = ({titulo,campos,btnId,onConfirm}) => {
     });
 }
 
+let totalAhorros = 0;
+const contadorAhorros = document.getElementById("contador__ahorros");
 
 const crearAhorro = (valores) => {
     const enlazar = document.createElement("div");
     enlazar.classList.add("enlazar");
+
+    const montoAhorrado = Number(valores.valor__ahorro);
+
+    totalAhorros += montoAhorrado;
+    contadorAhorros.textContent = `$${totalAhorros}`
 
     enlazar.innerHTML = `
         <div>
@@ -153,7 +165,11 @@ const crearAhorro = (valores) => {
         <hr>
     `;
 
-    enlazar.querySelector(".del__ahorro").addEventListener("click", () => enlazar.remove());
+    enlazar.querySelector(".del__ahorro").addEventListener("click", () => {
+        totalAhorros -= montoAhorrado;
+        contadorAhorros.textContent = `$${totalAhorros}`;
+        enlazar.remove()
+    });
 
     muestraHistorial.appendChild(enlazar);
 };
@@ -170,3 +186,4 @@ btnSumarAhorro.addEventListener("click", () => {
         onConfirm: crearAhorro
     });
 });
+

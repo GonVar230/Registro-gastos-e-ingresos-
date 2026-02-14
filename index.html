@@ -24,7 +24,7 @@
             <input type="number" id="ahorros-mes" name="ahorros-mes" required>
 
             <label for="mes">Mes a Evaluar</label>
-            <input type="text" id="mes" name="mes" required>
+            <input type="text" id="mes" name="mes" required maxlength="11">
 
             <button type="submit">Enviar</button>
         </form>
@@ -80,22 +80,18 @@
             <h3 class="mes__dashboard"></h3>
         </div>
 
+        <div class="simular__guardado">
+            <button id="guardar__sesion">Guardar Progreso</button>
+        </div>
+
         <div class="cont__ingresos">
             <h3>Total Ingresos</h3>
             <span id="monto__ingresos">$ 0</span>
-            
-            <div class="img__ingresos">
-                <img src="" alt="">
-            </div>
         </div>
 
         <div class="cont__gastos">
             <h3>Total Gastos</h3>
             <span id="monto__gastos">$ 0</span>
-
-            <div class="img__gastos">
-                <img src="" alt="">
-            </div>
         </div>
 
         <div class="movimientos">
@@ -119,7 +115,7 @@
         <div class="ahorros">
             <h3>Ahorrar</h3>
             <div>
-                <span>$ 0</span> <span id="ahorro__pensado"> </span>
+                <span id="contador__ahorros">$ 0</span> <span id="ahorro__pensado"></span>
             </div>
             
             <div>
