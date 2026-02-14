@@ -25,7 +25,6 @@ formulario.addEventListener("submit", (e) => {
     const ahorro = ahorroInput.value.trim();
     const mes = mesInput.value.trim();
 
-    
     // Mostramos los valores en el dashboard
     tituloNombre.textContent = nombre;
     montoIngresos.textContent = "$ " + ingresos;
@@ -39,7 +38,7 @@ formulario.addEventListener("submit", (e) => {
 
 // Haciendo un sidebar para el dashboard
 const logo = document.querySelector(".cont__imagen--logo");
-const spans = document.querySelectorAll("nav span");
+const spans = document.querySelectorAll(".span__sidebar");
 const sidebar = document.querySelector(".sidebar");
 
 // Cuando se hace hover se expande
@@ -49,7 +48,7 @@ sidebar.addEventListener("mouseenter", () => {
 
     layout.classList.add("expandido");
 
-    spans.forEach( (span) => {
+    spans.forEach( span => {
         span.classList.add("span__visible");
     });
 });
@@ -62,12 +61,10 @@ sidebar.addEventListener("mouseleave", () => {
     layout.classList.remove("expandido");
     layout.style.transition = "all 0.2s ease-in-out"
 
-    spans.forEach( (span) => {
+    spans.forEach( span => {
         span.classList.remove("span__visible");
     });
 });
-
-
 
 // Haciendo modal para intentar reutilizar la funcion
 
@@ -132,8 +129,11 @@ const crearAhorro = (valores) => {
 
     const montoAhorrado = Number(valores.valor__ahorro);
 
-    totalAhorros += montoAhorrado;
-    contadorAhorros.textContent = `$${totalAhorros}`
+    // if () {
+        totalAhorros += montoAhorrado;
+        contadorAhorros.textContent = `$${totalAhorros}`
+    // }
+
 
     // Esta son los divs que se van a generar en historial movimientos 
     enlazar.innerHTML = `
