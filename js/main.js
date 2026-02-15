@@ -123,16 +123,17 @@ const contadorAhorros = document.getElementById("contador__ahorros");
 const muestraHistorial = document.getElementById("muestra__historial");
 
 // Funcion para crear ahorro y enlazarlo al historial de ahorros
-const crearAhorro = (valores) => {
+const crearAhorro = (valores, sumarAlTotal = true) => {
     const enlazar = document.createElement("div");
     enlazar.classList.add("enlazar");
 
     const montoAhorrado = Number(valores.valor__ahorro);
 
-    // if () {
+    if (sumarAlTotal) {
         totalAhorros += montoAhorrado;
         contadorAhorros.textContent = `$${totalAhorros}`
-    // }
+    }
+
 
 
     // Esta son los divs que se van a generar en historial movimientos 
@@ -249,7 +250,7 @@ const cargarSesion = () => {
         crearAhorro({
             valor__ahorro: item.monto,
             fecha__ahorro: item.fecha
-        });
+        },sumarAlTotal = false);
     });
 };
 
