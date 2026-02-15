@@ -462,17 +462,17 @@ main h3 {
     margin-right: 2rem;
 }
 
-.enlazar button, .cerrar__modales {
+.enlazar button, .cerrar__modales,.del__historial {
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-.enlazar button > i,.cerrar__modales {
+.enlazar button > i,.cerrar__modales,.del__historial {
     color: var(--color-sidebar);
 }
 
-.enlazar button > i:hover, .cerrar__modales:hover {
+.enlazar button > i:hover, .cerrar__modales:hover,.del__historial:hover {
     color: var(--expense);
 }
 
@@ -525,4 +525,25 @@ main h3 {
 
 #cancelar__eliminar:hover {
     transform: scale(1.05);
+}
+
+
+/* Primer movimiento en la lista */
+#ultimos__movimientos {
+    border-collapse: collapse;
+    width: 85%;
+    margin-top: 1rem;
+    transform: translateX(50px);
+}
+
+.centrar__icono {
+    display: flex;
+    justify-content: center;
+}
+
+.centrar__icono i {
+    color: var(--color-navbar);
+    background-color: var(--income);
+    padding: 2px;
+    border-radius: 10px;
 }
