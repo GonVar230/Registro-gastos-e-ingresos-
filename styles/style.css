@@ -36,6 +36,19 @@ body {
 
 
 /* Formulario para extraer info */
+
+.alerta__name,.alerta__ingreso,.alerta__ahorro--mes,.alerta__mes {
+    color: var(--expense);
+    font-weight: bold;
+    font-size: .75rem;
+    transform: translateY(-10px);
+}
+
+.input-error {
+    border: 1px solid var(--expense);
+    box-shadow: 0 0 3px rgba(255, 77, 77, 0.4);
+}
+
 .cont__cuestionario--inicial {
     height: 100vh;
     display: flex;

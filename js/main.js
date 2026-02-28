@@ -15,9 +15,30 @@ const ahorroMostrar = document.getElementById("ahorro__pensado");
 const mesInput = document.getElementById("mes");
 const mesMostrar = document.querySelector(".mes__dashboard");
 
+
+const alertaNombre = document.querySelector(".alerta__name");
+const alertaIngreso = document.querySelector(".alerta__ingreso");
+const alertaAhorro = document.querySelector(".alerta__ahorro--mes");
+const alertaMes = document.querySelector(".alerta__mes");
+
+// Limpia los mensajes de error y elimina el estilo visual de error en los inputs
+const limpiarAlertas = () => {
+    alertaNombre.textContent = "";
+    alertaIngreso.textContent = "";
+    alertaAhorro.textContent = "";
+    alertaMes.textContent = "";
+
+    inputNombre.classList.remove("input-error");
+    inputIngresos.classList.remove("input-error");
+    ahorroInput.classList.remove("input-error");
+    mesInput.classList.remove("input-error");
+};
+
 // Escuchamos el submit del formulario
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
+
+    limpiarAlertas();
 
     // Seleccionamos los valores de los inputs
     const nombre = inputNombre.value.trim();
@@ -25,26 +46,36 @@ formulario.addEventListener("submit", (e) => {
     const ahorro = ahorroInput.value.trim();
     const mes = mesInput.value.trim();
 
+    // Se usa para bloquear el envio del formulario si algún campo es invalido
+    let hayErrores = false;
+
     // Validaciones
     if (!nombre) {
-        alert("Ingrese un nombre válido");
-        return;
+        alertaNombre.textContent = "Ingrese un nombre válido";
+        inputNombre.classList.add("input-error");
+        hayErrores = true;
     }
 
     if (!mes) {
-        alert("Ingrese un mes válido");
-        return;
+        alertaMes.textContent = "Ingrese un mes válido";
+        mesInput.classList.add("input-error");
+        hayErrores = true;
     }
 
     if (!ingresos || ingresos <= 0) {
-        alert("Los ingresos deben ser mayores a 0");
-        return;
+        alertaIngreso.textContent = "Los ingresos deben ser mayores a 0";
+        inputIngresos.classList.add("input-error");
+        hayErrores = true;
     }
 
     if (!ahorro || ahorro <= 0) {
-        alert("El ahorro debe ser mayor a 0");
-        return;
+        alertaAhorro.textContent = "El ahorro debe ser mayor a 0";
+        ahorroInput.classList.add("input-error");
+        hayErrores = true;
     }
+
+    // Cancela la ejecucion del submit si hayErrores es true
+    if (hayErrores) return;
 
     // Mostramos los valores en el dashboard
     tituloNombre.textContent = nombre;
