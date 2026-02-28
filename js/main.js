@@ -25,6 +25,27 @@ formulario.addEventListener("submit", (e) => {
     const ahorro = ahorroInput.value.trim();
     const mes = mesInput.value.trim();
 
+    // Validaciones
+    if (!nombre) {
+        alert("Ingrese un nombre válido");
+        return;
+    }
+
+    if (!mes) {
+        alert("Ingrese un mes válido");
+        return;
+    }
+
+    if (!ingresos || ingresos <= 0) {
+        alert("Los ingresos deben ser mayores a 0");
+        return;
+    }
+
+    if (!ahorro || ahorro <= 0) {
+        alert("El ahorro debe ser mayor a 0");
+        return;
+    }
+
     // Mostramos los valores en el dashboard
     tituloNombre.textContent = nombre;
     montoIngresos.textContent = "$ " + ingresos;
