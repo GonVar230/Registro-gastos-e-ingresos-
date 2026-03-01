@@ -44,9 +44,10 @@ body {
     transform: translateY(-10px);
 }
 
-.input-error {
-    border: 1px solid var(--expense);
-    box-shadow: 0 0 3px rgba(255, 77, 77, 0.4);
+/* Dandole un poco más especificidad y no tener que usar !important */
+.cont__cuestionario--inicial input.input-error  {
+    border: 1px solid var(--expense); 
+    box-shadow: 0 0 4px rgba(255, 77, 77, 0.4);
 }
 
 .cont__cuestionario--inicial {
@@ -347,7 +348,7 @@ main h3 {
 }
 
 
-/* Apartado ahorros  y historial de ahorros */
+/* caracteristicas de botones */
 
 #sumar__ahorro, #confirmar__ahorro,.simular__guardado > button {
     padding: .5rem;
@@ -381,35 +382,6 @@ main h3 {
     opacity: .75;
 }
 
-#muestra__historial {
-    max-height: 230px;   
-    overflow-y: auto;    
-}
-
-
-.tabla {
-    width: 85%;
-    margin-top: 10px;
-    transform: translateX(-10px);
-    border-collapse: collapse;
-}
-
-.tabla th,
-.tabla td {
-    text-align: left;
-    padding: 0.75rem;
-    border-bottom: 1px solid #e5e7eb;
-}
-
-.tabla th {
-    font-size: 0.8rem;
-    text-transform: uppercase;
-    color: var(--text-secondary);
-}
-
-.tabla th:first-of-type {
-    transform: translateX(50px);
-}
 
 /* Dandole el estilo al modal */
 
@@ -454,46 +426,39 @@ main h3 {
     }
 }
 
-/* divs creados en historial de ahorros */
-.enlazar {
-    margin: 20px 0px;
-    font-weight: 500;
-    width: 85%;
+/* tabla historial de ahorros */
+
+.tabla th,
+.tabla td {
+    text-align: left;
+    padding: 0.75rem;
+    border-bottom: 1px solid #e5e7eb;
 }
 
-.enlazar > div {
-    display: flex;
-    flex-direction: row;
-    justify-content: space-between;
+.tabla th {
+    font-size: 0.8rem;
+    text-transform: uppercase;
+    color: var(--text-secondary);
 }
 
-.enlazar div > i {
-    background-color: var(--income);
-    padding: 2px;
-    border-radius: 10px;
-    color: var(--color-border);
-    margin-right: 2rem;
-}
-
-.enlazar button, .cerrar__modales,.del__historial {
+#tabla__ahorros button, .cerrar__modales,.del__historial {
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-.enlazar button > i,.cerrar__modales,.del__historial {
+#tabla__ahorros button > i,.cerrar__modales,.del__historial {
     color: var(--color-sidebar);
 }
 
-.enlazar button > i:hover, .cerrar__modales:hover,.del__historial:hover {
+#tabla__ahorros button > i:hover, .cerrar__modales:hover,.del__historial:hover {
     color: var(--expense);
 }
 
-.enlazar hr {
-    margin-top: 4px;
-    border: .1px solid var(--color-bg);
+.contenedor__tabla {
+    max-height: 280px;   /* altura del scroll */
+    overflow-y: auto;
 }
-
 
 /* modal personalizada para borrar */
 
@@ -542,21 +507,16 @@ main h3 {
 
 
 /* Primer movimiento en la lista */
-#ultimos__movimientos {
+#ultimos__movimientos,#tabla__ahorros {
     border-collapse: collapse;
     width: 85%;
     margin-top: 1rem;
     transform: translateX(50px);
 }
 
-.centrar__icono {
-    display: flex;
-    justify-content: center;
-}
-
-.centrar__icono i {
+.bi-currency-dollar,.bi-piggy-bank{
     color: var(--color-navbar);
     background-color: var(--income);
-    padding: 2px;
+    padding: 2px 3px;
     border-radius: 10px;
 }

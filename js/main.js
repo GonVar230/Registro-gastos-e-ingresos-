@@ -176,12 +176,11 @@ const CrearModal = ({titulo,campos,btnId,onConfirm}) => {
 let totalAhorros = 0;
 const contadorAhorros = document.getElementById("contador__ahorros");
 const muestraHistorial = document.getElementById("muestra__historial");
+const tablaAhorros = document.getElementById("tabla__ahorros");
 
 // Funcion para crear ahorro y enlazarlo al historial de ahorros
 // El segundo parametro creamos una variiable la cual nos permita sumar si es true o false, dado que cuando guardaba los datos en el local storage se sumaban al recargar, entonces al momento de obtener eso guardado no se sume algo que no es un ahorro
 const crearAhorro = (valores, sumarAlTotal = true) => {
-    const enlazar = document.createElement("div");
-    enlazar.classList.add("enlazar");
 
     const montoAhorrado = Number(valores.valor__ahorro);
 
@@ -190,36 +189,33 @@ const crearAhorro = (valores, sumarAlTotal = true) => {
         contadorAhorros.textContent = `$${totalAhorros}`
     }
 
+    const filaAhorro = document.createElement("tr");
 
+    // Aca se crean las filas para la tabla, con el fin de que los valores queden mas centrados
+    filaAhorro.innerHTML = `
+        <td>
+            <i class="bi bi-piggy-bank"></i>
+        </td>
 
-    // Esta son los divs que se van a generar en historial movimientos 
-    enlazar.innerHTML = `
-        <div>
-            <div>
-                <i class="bi bi-piggy-bank"></i>
-                <span>$ ${valores.valor__ahorro}</span>
-            </div>
-        
-            <div>
-                <span>${valores.fecha__ahorro}</span>
-            </div>
-        
+        <td>$ ${valores.valor__ahorro}</td>
+
+        <td>${valores.fecha__ahorro}</td>
+
+        <td>
             <button class="del__ahorro">
                 <i class="bi bi-x-lg"></i>
             </button>
-        </div>
-
-        <hr>
+        </td>
     `;
 
-    // Eliminamos el div creado y sacamos el valor del total
-    enlazar.querySelector(".del__ahorro").addEventListener("click", () => {
+    // Borrar fila y restar del total
+    filaAhorro.querySelector(".del__ahorro").addEventListener("click", () => {
         totalAhorros -= montoAhorrado;
         contadorAhorros.textContent = `$ ${totalAhorros}`;
-        enlazar.remove()
+        filaAhorro.remove();
     });
 
-    muestraHistorial.appendChild(enlazar);
+    tablaAhorros.appendChild(filaAhorro);
 };
 
 // Boton para abrir el modal con los valores seleccionados para este modal
@@ -259,14 +255,17 @@ const guardarSesion = () => {
         historialIngresos: []
     }
 
-    // Se recorre los valores de los inputs que se aplican en los span 
-        document.querySelectorAll(".enlazar").forEach(item => {
-        const monto = item.querySelector("span").textContent.replace("$", "");
-        const fecha = item.querySelectorAll("span")[1].textContent;
+    // Se recorre los valores de los inputs que se aplican en los td de la tabla creados anteriormente
+    document.querySelectorAll("#tabla__ahorros tr").forEach(fila => {
+        const celdas = fila.querySelectorAll("td");
+        if (celdas.length === 0) return;
+
+        const monto = celdas[1].textContent.replace("$", "").trim();
+        const fecha = celdas[2].textContent;
 
         datos.historialAhorros.push({
-            monto: Number(monto),
-            fecha: fecha
+        monto: Number(monto),
+        fecha: fecha
         });
     });
 
@@ -384,7 +383,7 @@ const crearIngreso = (valores) => {
     const filaIngreso = document.createElement("tr");
 
         filaIngreso.innerHTML = `
-        <td class="centrar__icono">
+        <td>
             ${valores.icono || `<i class="bi bi-currency-dollar"></i>`} 
         </td>
 
