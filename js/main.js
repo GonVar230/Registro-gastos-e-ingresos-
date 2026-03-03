@@ -34,6 +34,26 @@ const limpiarAlertas = () => {
     mesInput.classList.remove("input-error");
 };
 
+// Modal con SweetAlert para recordatorio al iniciar el programa 
+const mostrarRecordatorio = () => {
+
+    setTimeout(() => {
+        Swal.fire({
+            title: "Recordatorio",
+            text: "Guarda los cambios luego de agregar un movimiento para asegurar el registro.",
+            icon: "info",
+            confirmButtonText: "Entendido",
+            confirmButtonColor: "#16A34A",
+            timer: 7000,
+            timerProgressBar: true,
+            allowOutsideClick: true
+        });
+
+        localStorage.setItem("recordatorioMostrado", "true");
+
+    }, 4000);
+};
+
 // Escuchamos el submit del formulario
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -89,6 +109,8 @@ formulario.addEventListener("submit", (e) => {
     // Se oculta el formulario y se muestra el dashboard 
     document.querySelector(".cont__cuestionario--inicial").style.display = "none";
     layout.style.display = "grid";
+
+    mostrarRecordatorio();
 });
 
 // Haciendo un sidebar para el dashboard
@@ -364,7 +386,8 @@ borrarProgreso.addEventListener("click", () => {
 
     // Confirmar borrar
     confirmarBorrar.querySelector("#confirmar__eliminar").addEventListener("click", () => {
-        localStorage.removeItem("dashboardFinanzas")
+        localStorage.removeItem("dashboardFinanzas");
+        localStorage.removeItem("recordatorioMostrado");
         location.reload();
     });
 
@@ -426,6 +449,8 @@ const primerIngreso = () => {
 
     crearIngreso(valores);
 }
+
+
 
 // Debe de ir al final para no generar conflicto 
 cargarSesion();
