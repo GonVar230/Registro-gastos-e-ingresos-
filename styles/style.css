@@ -194,55 +194,43 @@ aside hr {
     border: 1.5px solid var(--color-border);
 }
 
-aside nav {
+.item__sidebar,.info__sidebar {
     margin-top: 2rem;
 }
 
-nav ul {
-    list-style: none;
-    width: 100%;
-    display: flex;
-    flex-direction: column;
-    gap: 1.5rem; 
-}
-
-nav ul li {
-    width: 100%;
-    display: flex;
-    justify-content: center;
-}
-
-nav ul li a {
+.item__sidebar,.info__sidebar {
     display: flex;
     gap: 10px; 
     padding: 8px 30px;
-    text-decoration: none;
     color: var(--text-secondary);
-    border-radius: 5px;
     transition: var(--transition);
 }
 
-nav ul li a:hover {
+.item__sidebar:hover {
     background-color: var(--color-bg);
 }
 
-nav ul li a i {
+.item__sidebar i {
     font-size: 1.5rem;
     color: var(--text-secondary);
 }
 
-nav span {
+.item__sidebar span {
     display: none;
     font-size: 1.5rem;
     transition: var(--transition);
 }
 
-nav span.span__visible {
+.item__sidebar span.span__visible {
     display: inline;
     opacity: 1;
 }
 
-
+.info__sidebar {
+    letter-spacing: 1px;
+    line-height: 28px;
+    font-size: 1.2rem;
+}
 /* Main */
 
 main {
@@ -338,7 +326,7 @@ main h3 {
     color: var(--expense);
 }
 
-.cont__ingresos hr,.cont__gastos hr {
+.cont__ingresos hr,.cont__gastos hr,.ahorros hr {
     border: 1px solid var(--color-border);
     width: 100%;
 }
@@ -350,11 +338,23 @@ main h3 {
 
 /* caracteristicas de botones */
 
-#sumar__ahorro, #confirmar__ahorro,.simular__guardado > button {
+#sumar__ahorro, #confirmar__ahorro,.simular__guardado > button,#btn__agregar--ingreso,#confirmar__ingreso {
     padding: .5rem;
     border: none;
     color: var(--color-navbar);
     background-color: var(--income);
+    border: none;
+    border-radius: .5rem;
+    cursor: pointer;
+    letter-spacing: .5px;
+    min-width: 130px;
+}
+
+#btn__agregar--gasto,#confirmar__gasto {
+    padding: .5rem;
+    border: none;
+    color: var(--color-navbar);
+    background-color: var(--expense);
     border: none;
     border-radius: .5rem;
     cursor: pointer;
@@ -378,7 +378,7 @@ main h3 {
     opacity: .75;
 }
 
-#sumar__ahorro:hover,#confirmar__ahorro:hover, .simular__guardado > button:hover {
+#sumar__ahorro:hover,#confirmar__ahorro:hover, .simular__guardado > button:hover,#btn__agregar--gasto:hover,#btn__agregar--ingreso:hover,#confirmar__ingreso:hover,#confirmar__gasto:hover {
     opacity: .75;
 }
 
@@ -455,7 +455,7 @@ main h3 {
     color: var(--expense);
 }
 
-.contenedor__tabla {
+.contenedor__tabla,.contenedor__tabla--movimientos {
     max-height: 280px;   /* altura del scroll */
     overflow-y: auto;
 }
@@ -506,7 +506,7 @@ main h3 {
 }
 
 
-/* Primer movimiento en la lista */
+/* movimiento en la lista */
 #ultimos__movimientos,#tabla__ahorros {
     border-collapse: collapse;
     width: 85%;
@@ -517,6 +517,15 @@ main h3 {
 .bi-currency-dollar,.bi-piggy-bank{
     color: var(--color-navbar);
     background-color: var(--income);
-    padding: 2px 3px;
+    padding: 5px;
     border-radius: 10px;
 }
+
+.bi-house,.bi-fork-knife,.bi-controller,.bi-car-front-fill,.bi-exclamation-triangle,.bi-heart-pulse,.bi-cash {
+    color: var(--color-navbar);
+    background-color: var(--expense);
+    padding: 5px;
+    border-radius: 10px;
+}
+
+

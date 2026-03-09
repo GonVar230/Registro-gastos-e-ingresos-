@@ -53,28 +53,16 @@
 
         <hr>
 
-        <nav>
-            <ul>
-                <li>
-                    <a href="#" class="span__visible">
-                        <i class="bi bi-bar-chart-fill"></i>
-                        <span class="span__sidebar">Dashboard</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./pages/gastos.html">
-                        <i class="bi bi-graph-down-arrow"></i>
-                        <span class="span__sidebar">Gastos</span>
-                    </a>
-                </li>
-                <li>
-                    <a href="./pages/ingresos.html">
-                        <i class="bi bi-wallet2"></i>
-                        <span class="span__sidebar">Ingresos</span>
-                    </a>
-                </li>
-            </ul>
-        </nav>
+        <div class="item__sidebar">
+            <i class="bi bi-bar-chart-fill"></i>
+            <span class="span__sidebar">Dashboard</span>
+        </div>
+
+        <div class="info__sidebar">
+            <span id="text__sidebar">
+
+            </span>
+        </div>
 
     </aside>
 
@@ -93,25 +81,29 @@
             <h3>Total Ingresos</h3>
             <span id="monto__ingresos">$ 0</span>
             <hr>
+            <button id="btn__agregar--ingreso">Agregar Ingreso</button>
         </div>
 
         <div class="cont__gastos">
             <h3>Total Gastos</h3>
             <span id="monto__gastos">$ 0</span>
             <hr>
+            <button id="btn__agregar--gasto">Agregar Gastos</button>
         </div>
 
         <div class="movimientos">
             <h3>Últimos Movimientos</h3>
-            <table class="tabla" id="ultimos__movimientos">
-                <tr>
-                    <th>Icono</th>
-                    <th>Monto</th>
-                    <th>Fecha</th>
-                    <th>Tipo</th>
-                    <th></th>
-                </tr>
-            </table>
+            <div class="contenedor__tabla--movimientos">
+                <table class="tabla" id="ultimos__movimientos">
+                    <tr>
+                        <th>Icono</th>
+                        <th>Monto</th>
+                        <th>Fecha</th>
+                        <th>Tipo</th>
+                        <th></th>
+                    </tr>
+                </table>
+            </div>
         </div>
 
         <div class="historial__ahorros">
@@ -133,7 +125,7 @@
             <div>
                 <span id="contador__ahorros">$ 0</span> <span id="ahorro__pensado"></span>
             </div>
-            
+            <hr>
             <div>
                 <button id="sumar__ahorro">Sumar Ahorro</button>
             </div>

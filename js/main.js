@@ -110,13 +110,16 @@ formulario.addEventListener("submit", (e) => {
     document.querySelector(".cont__cuestionario--inicial").style.display = "none";
     layout.style.display = "grid";
 
+    if (!localStorage.getItem("recordatorioMostrado")) {
     mostrarRecordatorio();
+    }
 });
 
 // Haciendo un sidebar para el dashboard
 const logo = document.querySelector(".cont__imagen--logo");
-const spans = document.querySelectorAll(".span__sidebar");
+const spans = document.querySelector(".span__sidebar");
 const sidebar = document.querySelector(".sidebar");
+const textSideBar = document.getElementById("text__sidebar");
 
 // Cuando se hace hover se expande
 sidebar.addEventListener("mouseenter", () => {
@@ -125,9 +128,10 @@ sidebar.addEventListener("mouseenter", () => {
 
     layout.classList.add("expandido");
 
-    spans.forEach( span => {
-        span.classList.add("span__visible");
-    });
+    spans.classList.add("span__visible");
+
+    textSideBar.classList.add("span__visible");
+    textSideBar.textContent = "Controlá ingresos, gastos y ahorros en un solo lugar."
 });
 
 // Hover out y se contrae 
@@ -138,9 +142,10 @@ sidebar.addEventListener("mouseleave", () => {
     layout.classList.remove("expandido");
     layout.style.transition = "all 0.2s ease-in-out"
 
-    spans.forEach( span => {
-        span.classList.remove("span__visible");
-    });
+    spans.classList.remove("span__visible");
+
+    textSideBar.classList.remove("span__visible");
+    textSideBar.textContent = ""
 });
 
 // Haciendo modal para intentar reutilizar la funcion
@@ -156,10 +161,29 @@ const CrearModal = ({titulo,campos,btnId,onConfirm}) => {
     form.classList.add("modal__form");
 
     // Esta variable nos permite generar inputs dinamicamente para futuros modales segun el valore que recibe "campos"
-    let inputsHTML = campos.map(campo => `
+    //Le tuve agregar una condicional para detectar si el campo es de tipo "select" y así permita crear opciones
+    let inputsHTML = campos.map(campo => {
+
+    // Si el campo es de tipo select se generan las opciones dinámicamente
+    if (campo.type === "select") {
+        const opciones = campo.options.map(op =>
+            `<option value="${op}">${op}</option>`
+        ).join("");
+
+        return `
+            <label>${campo.label}</label>
+            <select id="${campo.id}" required>
+                ${opciones}
+            </select>
+        `;
+    }
+
+    // Si no es select, se genera un input normal usando el type recibido
+    return `
         <label>${campo.label}</label>
         <input type="${campo.type}" id="${campo.id}" required>
-    `).join("");
+    `;
+}).join("");
 
     // Este es el modelo de los modales para completar reutilizable
     form.innerHTML = `
@@ -252,6 +276,67 @@ btnSumarAhorro.addEventListener("click", () => {
         ],
         btnId: "confirmar__ahorro",
         onConfirm: crearAhorro
+    });
+});
+
+// Boton para abrir modal y agregar ingreso
+const btnAgregarIngreso = document.getElementById("btn__agregar--ingreso");
+
+btnAgregarIngreso.addEventListener("click", () => {
+    CrearModal({
+        titulo: "Agregar Ingreso",
+        campos: [
+            { label: "Monto", type: "number", id: "valor__ingreso" },
+            { label: "Fecha", type: "date", id: "fecha__ingreso" }
+        ],
+        btnId: "confirmar__ingreso",
+        onConfirm: (valores) => {
+            crearIngreso({
+                valor__ahorro: valores.valor__ingreso,
+                fecha__ahorro: new Date(valores.fecha__ingreso).toLocaleDateString(),
+                tipo: "Ingreso"
+            });
+        }
+    });
+});
+
+// Boton para abrir modal y agregar gasto
+const btnAgregarGasto = document.getElementById("btn__agregar--gasto");
+
+btnAgregarGasto.addEventListener("click", () => {
+    CrearModal({
+        titulo: "Agregar Gasto",
+        campos: [
+            {
+                label: "Tipo de Gasto",
+                type: "select",
+                id: "tipo__gasto",
+                options: [
+                    "Entretenimiento",
+                    "Hogar",
+                    "Comida",
+                    "Transporte",
+                    "Imprevisto",
+                    "Salud"
+                ]
+            },
+            { label: "Monto", type: "number", id: "valor__gasto" },
+            { label: "Fecha", type: "date", id: "fecha__gasto" }
+        ],
+        btnId: "confirmar__gasto",
+
+        onConfirm: (valores) => {
+
+            const icono = obtenerIconoGasto(valores.tipo__gasto);
+
+            crearIngreso({
+                valor__ahorro: valores.valor__gasto,
+                fecha__ahorro: new Date(valores.fecha__gasto).toLocaleDateString(),
+                icono: icono,
+                tipo: valores.tipo__gasto
+            });
+
+        }
     });
 });
 
@@ -433,6 +518,33 @@ const crearIngreso = (valores) => {
     });
 }
 
+// Devuelve el icono segun el tipo de gasto seleccionado
+const obtenerIconoGasto = (tipo) => {
+
+    switch (tipo) {
+        case "Entretenimiento":
+            return `<i class="bi bi-controller"></i>`;
+
+        case "Hogar":
+            return `<i class="bi bi-house"></i>`;
+
+        case "Comida":
+            return `<i class="bi bi-fork-knife"></i>`;
+
+        case "Transporte":
+            return `<i class="bi bi-car-front-fill"></i>`;
+
+        case "Imprevisto":
+            return `<i class="bi bi-exclamation-triangle"></i>`;
+
+        case "Salud":
+            return `<i class="bi bi-heart-pulse"></i>`;
+
+        default:
+            return `<i class="bi bi-cash"></i>`;
+    }
+};
+
 
 // Ponemos el primer mes como un ahorro en ultimos movimientos 
 const primerIngreso = () => {
@@ -449,6 +561,14 @@ const primerIngreso = () => {
 
     crearIngreso(valores);
 }
+
+
+
+
+
+
+
+
 
 
 
