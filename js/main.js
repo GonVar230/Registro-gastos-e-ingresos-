@@ -97,6 +97,8 @@ formulario.addEventListener("submit", (e) => {
     // Cancela la ejecucion del submit si hayErrores es true
     if (hayErrores) return;
 
+    localStorage.removeItem("recordatorioMostrado");
+
     // Mostramos los valores en el dashboard
     tituloNombre.textContent = nombre;
     montoIngresos.textContent = "$ " + ingresos;
@@ -261,7 +263,8 @@ const crearAhorro = (valores, sumarAlTotal = true) => {
         filaAhorro.remove();
     });
 
-    tablaAhorros.appendChild(filaAhorro);
+    // Para poner encima en vez de abajo
+    tablaAhorros.prepend(filaAhorro);
 };
 
 // Boton para abrir el modal con los valores seleccionados para este modal
@@ -275,7 +278,12 @@ btnSumarAhorro.addEventListener("click", () => {
             { label: "Fecha", type: "date", id: "fecha__ahorro" }
         ],
         btnId: "confirmar__ahorro",
-        onConfirm: crearAhorro
+        onConfirm: (valores) => {
+            crearAhorro({
+                valor__ahorro: valores.valor__ahorro,
+                fecha__ahorro: new Date(valores.fecha__ahorro).toLocaleDateString()
+            });
+        }
     });
 });
 
@@ -358,6 +366,7 @@ const guardarSesion = () => {
         ahorroPlan: ahorroMostrar.textContent,
         mes: mesMostrar.textContent,
         totalAhorros: totalAhorros,
+        balanceTotal: balanceTotal,
         historialAhorros: [],
         historialIngresos: []
     }
@@ -423,20 +432,25 @@ const cargarSesion = () => {
     totalAhorros = datosGuardados.totalAhorros;
     contadorAhorros.textContent = `$ ${totalAhorros}`;
 
+    balanceTotal = datosGuardados.balanceTotal || 0;
+    balanceMovimientos.textContent = `$ ${balanceTotal}`;
+
     layout.style.display = "grid";
     document.querySelector(".cont__cuestionario--inicial").style.display = "none";
+    
 
     // Recorre los ahorros guardados y los muestra
     // Se pasa false para que no se sumen nuevamente al total
-    datosGuardados.historialAhorros.forEach(item => {
+    datosGuardados.historialAhorros.reverse().forEach(item => {
         crearAhorro({
             valor__ahorro: item.monto,
             fecha__ahorro: item.fecha
         },false);
     });
 
+    ultimosMovimientos.innerHTML = "";
     // Recorre los ingresos guardados y los muestra
-    datosGuardados.historialIngresos.forEach(item => {
+    datosGuardados.historialIngresos.reverse().forEach(item => {
         crearIngreso({
             valor__ahorro: item.monto,
             fecha__ahorro: item.fecha,
@@ -444,6 +458,7 @@ const cargarSesion = () => {
             tipo: item.tipo
         });
     });
+    actualizarBalance();
 };
 
 
@@ -482,15 +497,43 @@ borrarProgreso.addEventListener("click", () => {
     });
 });
 
+// Para igualar y mostrar totales
+let totalIngresos = 0;
+let totalGastos = 0;
+const montoGastos = document.getElementById("monto__gastos");
+
+// Generamos un balance total
+let balanceTotal = 0;
+const balanceMovimientos = document.getElementById("balance__movimientos");
+
+const actualizarBalance = () => {
+    balanceTotal = totalIngresos - totalGastos;
+    balanceMovimientos.textContent = `$ ${balanceTotal}`;
+};
+
 // tabla donde se agregan los últimos movimientos 
 const ultimosMovimientos = document.getElementById("ultimos__movimientos");
 
 // Funcion reutilizable para crear ingresos
 const crearIngreso = (valores) => {
 
+    const monto = Number(valores.valor__ahorro);
+    const esIngreso = valores.tipo === "Ingreso";
+
+    // Condicional para ver si es un ingreso
+    if (esIngreso) {
+        totalIngresos += monto;
+        montoIngresos.textContent = `$ ${totalIngresos}`;
+    } else {
+        totalGastos += monto;
+        montoGastos.textContent = `$ ${totalGastos}`;
+    }
+
+    actualizarBalance();
+
     const filaIngreso = document.createElement("tr");
 
-        filaIngreso.innerHTML = `
+    filaIngreso.innerHTML = `
         <td>
             ${valores.icono || `<i class="bi bi-currency-dollar"></i>`} 
         </td>
@@ -510,10 +553,19 @@ const crearIngreso = (valores) => {
         </td>
     `;
 
-        ultimosMovimientos.appendChild(filaIngreso);
+    // Para poner encima en vez de abajo
+    ultimosMovimientos.prepend(filaIngreso);
 
-        // Boton que se encarga de borrar la fila
-        filaIngreso.querySelector(".del__historial").addEventListener("click", () => {
+    // Boton que se encarga de borrar la fila y influye en total
+    filaIngreso.querySelector(".del__historial").addEventListener("click", () => {
+        if (esIngreso) {
+            totalIngresos -= monto;
+            montoIngresos.textContent = `$ ${totalIngresos}`;
+        } else {
+            totalGastos -= monto;
+            montoGastos.textContent = `$ ${totalGastos}`;
+        }
+        actualizarBalance();
         filaIngreso.remove()
     });
 }
@@ -539,9 +591,6 @@ const obtenerIconoGasto = (tipo) => {
 
         case "Salud":
             return `<i class="bi bi-heart-pulse"></i>`;
-
-        default:
-            return `<i class="bi bi-cash"></i>`;
     }
 };
 
@@ -549,7 +598,7 @@ const obtenerIconoGasto = (tipo) => {
 // Ponemos el primer mes como un ahorro en ultimos movimientos 
 const primerIngreso = () => {
 
-    const ingresoIndividual = inputIngresos.value.trim();
+    const ingresoIndividual = Number(inputIngresos.value.trim());
 
     if(!ingresoIndividual) return;
 
@@ -561,15 +610,6 @@ const primerIngreso = () => {
 
     crearIngreso(valores);
 }
-
-
-
-
-
-
-
-
-
 
 
 // Debe de ir al final para no generar conflicto 

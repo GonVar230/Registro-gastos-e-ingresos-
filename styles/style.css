@@ -251,6 +251,14 @@ main h3 {
     font-weight: 300;
 }
 
+.cont__balance {
+    grid-column-start: 2;
+    grid-row-start: 1;
+    display: flex;
+    justify-content: left;
+    align-items: center;
+}
+
 .cont__ingresos {
     grid-row: span 2 / span 2;
     grid-column-start: 1;
@@ -287,6 +295,7 @@ main h3 {
 .mes {
     grid-column-start: 1;
     grid-row-start: 1;
+    position: relative;
 }
 
 .simular__guardado {
@@ -296,6 +305,19 @@ main h3 {
     align-items: end;
 }
 
+/* Generando un balance*/
+
+.balance {
+    font-size: 1.8rem;
+    font-weight: 400;
+    color: var(--text-primary);
+    border-radius: 10px;
+    letter-spacing: 1px;
+}
+
+#balance__movimientos {
+    font-weight: bold;
+}
 
 /* Dandole vida a el main */
 .mes {
@@ -432,7 +454,7 @@ main h3 {
 .tabla td {
     text-align: left;
     padding: 0.75rem;
-    border-bottom: 1px solid #e5e7eb;
+    border-bottom: 1px solid  var(--color-border);
 }
 
 .tabla th {
@@ -441,17 +463,17 @@ main h3 {
     color: var(--text-secondary);
 }
 
-#tabla__ahorros button, .cerrar__modales,.del__historial {
+.contenedor__tabla button, .cerrar__modales,.del__historial {
     border: none;
     background-color: transparent;
     cursor: pointer;
 }
 
-#tabla__ahorros button > i,.cerrar__modales,.del__historial {
+.contenedor__tabla button > i,.cerrar__modales,.del__historial {
     color: var(--color-sidebar);
 }
 
-#tabla__ahorros button > i:hover, .cerrar__modales:hover,.del__historial:hover {
+.contenedor__tabla button > i:hover, .cerrar__modales:hover,.del__historial:hover {
     color: var(--expense);
 }
 
@@ -507,7 +529,8 @@ main h3 {
 
 
 /* movimiento en la lista */
-#ultimos__movimientos,#tabla__ahorros {
+.contenedor__tabla table,
+.contenedor__tabla--movimientos table {
     border-collapse: collapse;
     width: 85%;
     margin-top: 1rem;

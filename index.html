@@ -72,6 +72,10 @@
             <h3 class="mes__dashboard"></h3>
         </div>
 
+        <div class="cont__balance">
+            <span class="balance">Balance: <span id="balance__movimientos">$ 0</span></span>
+        </div>
+
         <div class="simular__guardado">
             <button id="guardar__sesion">Guardar Progreso</button>
             <button id="borrar__progreso">Borrar Progreso</button>
@@ -92,9 +96,10 @@
         </div>
 
         <div class="movimientos">
-            <h3>Últimos Movimientos</h3>
-            <div class="contenedor__tabla--movimientos">
-                <table class="tabla" id="ultimos__movimientos">
+        <h3>Últimos Movimientos</h3>
+        <div class="contenedor__tabla--movimientos">
+            <table class="tabla">
+                <thead>
                     <tr>
                         <th>Icono</th>
                         <th>Monto</th>
@@ -102,23 +107,14 @@
                         <th>Tipo</th>
                         <th></th>
                     </tr>
-                </table>
-            </div>
+                </thead>
+                <tbody id="ultimos__movimientos"></tbody>
+            </table>
+            
+        </div>
         </div>
 
-        <div class="historial__ahorros">
-            <h3>Historial Ahorros</h3>
-            <div class="contenedor__tabla">
-                <table class="tabla" id="tabla__ahorros">
-                    <tr>
-                        <th>Icono</th>
-                        <th>Monto</th>
-                        <th>Fecha</th>
-                        <th></th>
-                    </tr>
-                </table>
-            </div>
-        </div>
+
 
         <div class="ahorros">
             <h3>Ahorrar</h3>
@@ -130,8 +126,29 @@
                 <button id="sumar__ahorro">Sumar Ahorro</button>
             </div>
         </div>
+
+        
+        <div class="historial__ahorros">
+            <h3>Historial Ahorros</h3>
+            <div class="contenedor__tabla">
+                <table class="tabla">
+                    <thead>
+                        <tr>
+                            <th>Icono</th>
+                            <th>Monto</th>
+                            <th>Fecha</th>
+                            <th></th>
+                        </tr>
+                    </thead>
+                    <tbody id="tabla__ahorros"></tbody>
+                </table>
+            </div>
+        </div>
+
+
+
     </main>
-    
+
     </div>
 
     <script src="https://cdn.jsdelivr.net/npm/sweetalert2@11"></script>
