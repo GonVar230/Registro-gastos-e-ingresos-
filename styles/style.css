@@ -478,7 +478,7 @@ main h3 {
 }
 
 .contenedor__tabla,.contenedor__tabla--movimientos {
-    max-height: 280px;   /* altura del scroll */
+    max-height: 250px;   /* altura del scroll */
     overflow-y: auto;
 }
 
@@ -550,5 +550,3 @@ main h3 {
     padding: 5px;
     border-radius: 10px;
 }
-
-

@@ -54,6 +54,18 @@ const mostrarRecordatorio = () => {
     }, 4000);
 };
 
+// Regex necesario para el nombre y mes del formulario.
+const soloTexto = /^[A-Za-zÁÉÍÓÚáéíóúÑñ\s]+$/;
+
+// Validacion individual porque si no, se validaria solo cuando hago
+inputNombre.addEventListener("input", () => {
+    inputNombre.value = inputNombre.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
+});
+
+mesInput.addEventListener("input", () => {
+    mesInput.value = mesInput.value.replace(/[^A-Za-zÁÉÍÓÚáéíóúÑñ\s]/g, "");
+});
+
 // Escuchamos el submit del formulario
 formulario.addEventListener("submit", (e) => {
     e.preventDefault();
@@ -441,6 +453,7 @@ const cargarSesion = () => {
 
     // Recorre los ahorros guardados y los muestra
     // Se pasa false para que no se sumen nuevamente al total
+    // Utilice reverse() en ambos casos porque al hacer refresh se invertian por usar prepend()
     datosGuardados.historialAhorros.reverse().forEach(item => {
         crearAhorro({
             valor__ahorro: item.monto,
@@ -460,8 +473,6 @@ const cargarSesion = () => {
     });
     actualizarBalance();
 };
-
-
 
 // simulacion de borrar progreso que en realidad nos mandaria para el inicio del form para volver a empezar
 
@@ -610,6 +621,29 @@ const primerIngreso = () => {
 
     crearIngreso(valores);
 }
+
+//Un filtro en movimientos
+const filtroMovimientos = document.getElementById("filtro__movimientos");
+
+const filtrarMovimientos = () => {
+
+    const valorFiltro = filtroMovimientos.value.toLowerCase();
+    const filas = document.querySelectorAll("#ultimos__movimientos tr");
+
+    filas.forEach(fila => {
+
+        const tipo = fila.querySelector("td:nth-child(4)").textContent.toLowerCase();
+
+        if (valorFiltro === "todo" || tipo === valorFiltro) {
+            fila.style.display = "";
+        } else {
+            fila.style.display = "none";
+        }
+
+    });
+};
+
+filtroMovimientos.addEventListener("change", filtrarMovimientos);
 
 
 // Debe de ir al final para no generar conflicto 
