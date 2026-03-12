@@ -484,19 +484,31 @@ main h3 {
 
 /* modal personalizada para borrar */
 
-.modal__borrar {
+.background__borrar {
     position: fixed;
     inset: 0; 
     display: flex;
     flex-direction: column;
     justify-content: center;
     align-items: center;
-    backdrop-filter: blur(2px);
+    backdrop-filter: blur(3px);
     z-index: 1000;
-    padding: 1.5rem;
-    gap: 1rem;
     box-shadow: var(--shadow-soft);
     animation: modalFade 0.2s ease;
+}
+
+.modal__borrar {
+    background: var(--color-bg);
+    max-width: 700px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    gap: 1rem;
+    padding: 1.5rem;
+    border-radius: 1rem;
+    text-align: center;
+    opacity: .9;
 }
 
 #confirmar__eliminar, #cancelar__eliminar {
@@ -549,4 +561,69 @@ main h3 {
     background-color: var(--expense);
     padding: 5px;
     border-radius: 10px;
+}
+
+@media screen and (max-width:768px){
+    .layout{
+        grid-template-columns: 1fr;
+        grid-template-rows: repeat(3,100px) repeat(5, 1fr);
+        margin: 0;
+    }
+    main{
+        grid-template-columns: 1fr;
+        margin: 0;
+    }
+    header {
+        text-align: center;
+        padding: 0 1rem;
+    }
+    header > h1 {
+        font-size: 1.5rem;
+    }
+    aside {
+        display: none;
+    }
+    .mes {
+        grid-column:1;
+        grid-row: 2;
+    }
+    .cont__balance {
+        grid-column:1;
+        grid-row:3;
+    }
+    .simular__guardado {
+        grid-column:1;
+        grid-row: 4;
+        display: flex;
+        justify-content: left;
+    }
+    .cont__ingresos{
+        grid-column:1;
+        grid-row: 5;
+        height: 200px;
+    }   
+    .cont__gastos{
+        grid-column:1;
+        grid-row: 6;
+        height: 200px;
+    }
+    .movimientos{
+        grid-column:1;
+        grid-row: 7;
+        height: 350px;
+    }
+    .ahorros{
+        grid-column:1;
+        grid-row: 8;
+        height: 200px;
+    }
+    .historial__ahorros{
+        grid-column:1;
+        grid-row: 9;
+        height: 300px;
+    }
+    .cont__balance,.cont__ingresos,.cont__gastos,.movimientos,.ahorros,.historial__ahorros,.mes,.simular__guardado{
+        width:90%;
+        margin: 0 auto;
+    }
 }

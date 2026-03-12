@@ -482,14 +482,16 @@ borrarProgreso.addEventListener("click", () => {
 
     // Creamos modal de confirmación
     let confirmarBorrar = document.createElement("div");
-    confirmarBorrar.classList.add("modal__borrar");
+    confirmarBorrar.classList.add("background__borrar");
 
     confirmarBorrar.innerHTML= `
-    <h2>¿Estas seguro que quieres borrar tu progreso?</h2>
-    <p>Esta acción eliminará todos tus datos guardados y te llevará nuevamente al formulario inicial.</p>
-    <div>
-        <button id="confirmar__eliminar">Confirmar</button>
-        <button id="cancelar__eliminar">Cancelar</button>
+    <div class="modal__borrar">
+        <h2>¿Estas seguro que quieres borrar tu progreso?</h2>
+        <p>Esta acción eliminará todos tus datos guardados y te llevará nuevamente al formulario inicial.</p>
+        <div>
+            <button id="confirmar__eliminar">Confirmar</button>
+            <button id="cancelar__eliminar">Cancelar</button>
+        </div>
     </div>
     `
 
