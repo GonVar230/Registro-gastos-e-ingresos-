@@ -442,10 +442,10 @@ const cargarSesion = () => {
     mesMostrar.textContent = datosGuardados.mes;
 
     totalAhorros = datosGuardados.totalAhorros;
-    contadorAhorros.textContent = `$ ${totalAhorros}`;
+    contadorAhorros.textContent = `$${totalAhorros}`;
 
     balanceTotal = datosGuardados.balanceTotal || 0;
-    balanceMovimientos.textContent = `$ ${balanceTotal}`;
+    balanceMovimientos.textContent = `$${balanceTotal}`;
 
     layout.style.display = "grid";
     document.querySelector(".cont__cuestionario--inicial").style.display = "none";
@@ -521,7 +521,7 @@ const balanceMovimientos = document.getElementById("balance__movimientos");
 
 const actualizarBalance = () => {
     balanceTotal = totalIngresos - totalGastos;
-    balanceMovimientos.textContent = `$ ${balanceTotal}`;
+    balanceMovimientos.textContent = `$${balanceTotal}`;
 };
 
 // tabla donde se agregan los últimos movimientos 
@@ -536,10 +536,10 @@ const crearIngreso = (valores) => {
     // Condicional para ver si es un ingreso
     if (esIngreso) {
         totalIngresos += monto;
-        montoIngresos.textContent = `$ ${totalIngresos}`;
+        montoIngresos.textContent = `$${totalIngresos}`;
     } else {
         totalGastos += monto;
-        montoGastos.textContent = `$ ${totalGastos}`;
+        montoGastos.textContent = `$${totalGastos}`;
     }
 
     actualizarBalance();
@@ -573,10 +573,10 @@ const crearIngreso = (valores) => {
     filaIngreso.querySelector(".del__historial").addEventListener("click", () => {
         if (esIngreso) {
             totalIngresos -= monto;
-            montoIngresos.textContent = `$ ${totalIngresos}`;
+            montoIngresos.textContent = `$${totalIngresos}`;
         } else {
             totalGastos -= monto;
-            montoGastos.textContent = `$ ${totalGastos}`;
+            montoGastos.textContent = `$${totalGastos}`;
         }
         actualizarBalance();
         filaIngreso.remove()
