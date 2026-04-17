@@ -257,6 +257,7 @@ main h3 {
     display: flex;
     justify-content: left;
     align-items: center;
+    position: relative;
 }
 
 .cont__ingresos {
@@ -561,6 +562,31 @@ main h3 {
     background-color: var(--expense);
     padding: 5px;
     border-radius: 10px;
+}
+
+/* CONVERSOR */
+
+.conversor {
+    display: flex;
+    flex-direction: column;
+    gap: 4px;
+    margin-left: 2rem;
+    font-weight: 600;
+}
+
+.organizando--conversor {
+    display: flex;
+    align-items: center;
+    gap: 8px;
+}
+
+#moneda--convertida {
+    min-width: 120px;
+    margin: 0;
+}
+
+#converter {
+    cursor: pointer;
 }
 
 @media screen and (max-width:768px){
